@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ازالة النقاط</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #fce4ec);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #26c6da;
+            outline: none;
+            box-shadow: 0 0 8px rgba(38, 198, 218, 0.3);
+        }
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 18px;
+            margin-right: 5px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #26c6da;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #00acc1;
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(38, 198, 218, 0.3);
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            input, textarea, button {
+                font-size: 16px;
+                padding: 10px;
+            }
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #565656;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ازالة النقاط</h1>
+        <input type="text" id="inputText" placeholder="أدخل النص هنا">
+        <textarea id="outputText" readonly placeholder="النص بدون نقاط سيظهر هنا"></textarea>
+        <button onclick="convertText()">تحويل</button>
+        <button onclick="copyText()">نسخ</button>
+    </div>
+
+    <div class="footer">
+        تم صنع الصفحة من قبل <a href="https://coderinventor.github.io/social/" style="color: #ff0000; text-decoration: none;">coder inventor</a>
+    </div>
+
+    <script>
+        function convertText() {
+            const inputText = document.getElementById("inputText").value;
+            const conversionMap = {
+                'ا': 'ا', 'ب': 'ٮ', 'ت': 'ٮ', 'ث': 'ٮ', 'ج': 'ح', 'ح': 'ح', 'خ': 'ح',
+                'د': 'د', 'ذ': 'د', 'ر': 'ر', 'ز': 'ر', 'س': 'س', 'ش': 'س', 'ص': 'ص',
+                'ض': 'ص', 'ط': 'ط', 'ظ': 'ط', 'ع': 'ع', 'غ': 'ع', 'ف': 'ٯ', 'ق': 'ٯ',
+                'ك': 'ك', 'ل': 'ل', 'م': 'م', 'ن': 'ں', 'ه': 'ه', 'و': 'و', 'ي': 'ى',
+                'ة': 'ه'
+            };
+            
+            let outputText = '';
+            for (let char of inputText) {
+                outputText += conversionMap[char] || char;
+            }
+            document.getElementById("outputText").value = outputText;
+        }
+
+        function copyText() {
+            const outputText = document.getElementById("outputText");
+            outputText.select();
+            document.execCommand("copy");
+            alert("تم نسخ النص!");
+        }
+    </script>
+
+</body>
+</html>
